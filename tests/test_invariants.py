@@ -7,11 +7,6 @@ mismatch from going undetected.
 
 import itertools
 
-import sys
-from pathlib import Path
-
-# Add parent directory to enable 'import fastpipe'
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 import fastpipe
 

@@ -4,11 +4,6 @@ Previously, flush failures were silently swallowed with logger.warning, causing
 data loss. This has been fixed - flush failures now raise exceptions.
 """
 
-import sys
-from pathlib import Path
-
-# Add parent directory to enable 'import fastpipe'
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 import fastpipe
 from fastpipe._executors import _flush_partial_batch
