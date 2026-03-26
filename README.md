@@ -122,7 +122,7 @@ class ModelProcessor:
     def __call__(self, data):
         return self.model.predict(data)
 
-# ✅ Efficient: Only class definition is serialized
+# Efficient: Only class definition is serialized
 results = (fastpipe.create()
     .map(
         ModelProcessor,
@@ -133,7 +133,7 @@ results = (fastpipe.create()
     )
     .run(data))
 
-# ❌ Inefficient: Entire model serialized to each worker
+# Inefficient: Entire model serialized to each worker
 processor = ModelProcessor('model.pth')
 results = pipe.map(processor, workers=4, mode='process').run(data)
 ```
@@ -229,7 +229,7 @@ results = fastpipe.create() \
 
 | Feature | pypeln | fastpipe |
 |---------|--------|----------|
-| Streaming mode | ❌ | ✅ |
+| Streaming mode | No | Yes |
 | Async support | Separate module | Unified API |
 | Mode switching | Change imports | Change parameter |
 | Auto adapters | Manual | Automatic |
@@ -253,9 +253,9 @@ results = fastpipe.create() \
 FastPipe focuses on core parallel processing. You add retry (tenacity), metrics (prometheus), and timeouts as needed.
 
 **Scope**:
-- ✅ Single-machine parallel processing (10-1000 workers)
-- ❌ Distributed computing → Use Ray, Dask, Spark
-- ❌ Task queues → Use Celery, RQ
+- Single-machine parallel processing (10-1000 workers)
+- NOT for distributed computing → Use Ray, Dask, Spark
+- NOT for task queues → Use Celery, RQ
 
 **Principles**:
 1. **Simple over clever** - No magic, explicit API
